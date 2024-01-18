@@ -29,16 +29,43 @@ func (p Polynom) Eq(q Polynom) bool {
 }
 
 func (p Polynom) Add(q Polynom) Polynom {
-	// TO DO
-	return NewPolynom(3)
+	// Ensure the resulting polynomial has enough space
+	result := make(Polynom, max(p.Grad(), q.Grad())+1)
+
+	// Perform polynomial addition by adding corresponding coefficients
+	for i, val := range p {
+		result[i] += val
+	}
+	for i, val := range q {
+		result[i] += val
+	}
+
+	return result
 }
 
 func (p Polynom) Mul(q Polynom) Polynom {
-	// TO DO
-	return NewPolynom(3)
+	// Calculate the degree of the resulting polynomial
+	deg := p.Grad() + q.Grad()
+
+	// Initialize the resulting polynomial with the appropriate degree
+	result := make(Polynom, deg+1)
+
+	// Perform polynomial multiplication using nested loops
+	for i := 0; i <= p.Grad(); i++ {
+		for j := 0; j <= q.Grad(); j++ {
+			result[i+j] += p[i] * q[j]
+		}
+	}
+
+	return result
 }
 
 func (p Polynom) Eval(x float64) float64 {
-	// TO DO
-	return 53
+	// Evaluate the polynomial using Horner's method
+	result := 0.0
+	for i := p.Grad(); i >= 0; i-- {
+		result = result*x + p[i]
+	}
+
+	return result
 }
