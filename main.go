@@ -31,5 +31,10 @@ func main() {
 	p4 = p1a.Mul(p2)
 	fmt.Printf("p4 : %v, grad: %d\n", p4, p4.Grad())
 
+	p5 := polynom.NewPolynomByValues(1, 1)
+
+	p6 := p5.Mul(p5).Mul(p5).Mul(p5).Mul(p5)
+	fmt.Printf("p6 : %v, grad: %d\n", p6, p6.Grad())
+
 	fmt.Printf("p4(2.56): %.5f\n", p4.Eval(2.56))
 }
