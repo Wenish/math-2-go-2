@@ -30,7 +30,7 @@ func (p Polynom) Eq(q Polynom) bool {
 
 func (p Polynom) Add(q Polynom) Polynom {
 	// Array erstellen, welches genügen platz hat für das neue Polynom
-	result := make(Polynom, max(p.Grad(), q.Grad())+1)
+	result := NewPolynom(max(p.Grad(), q.Grad()))
 
 	// das basis polynom zum neuen polynom anfügen
 	for i, val := range p {
@@ -68,8 +68,8 @@ func (p Polynom) Mul(q Polynom) Polynom {
 	// "Der Grad des resultierenden Polynoms ist die Summe der Grade der Ausgangspolynome – Ende." S. Mühlebach (18. Januar 2024)
 	gradNewPolynom := p.Grad() + q.Grad()
 
-	// Initialize the resulting polynomial with the appropriate degree
-	result := make(Polynom, gradNewPolynom+1)
+	// Array erstellen, welches genügen platz hat für das neue Polynom
+	result := NewPolynom(gradNewPolynom)
 
 	// Perform polynomial multiplication using nested loops
 	for i := 0; i <= p.Grad(); i++ {
