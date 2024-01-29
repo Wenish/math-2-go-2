@@ -29,8 +29,10 @@ func (p Polynom) Eq(q Polynom) bool {
 }
 
 func (p Polynom) Add(q Polynom) Polynom {
-	// Array erstellen, welches genügen platz hat für das neue Polynom
-	result := NewPolynom(max(p.Grad(), q.Grad()))
+	// Type Polynom Slice erstellen, welches genügen platz hat für das neue Polynom
+	// mit max nimt es den grösseren grad wert als initial grid für das neue polynom
+	gradNewPolynom := max(p.Grad(), q.Grad())
+	result := NewPolynom(gradNewPolynom)
 
 	// das basis polynom zum neuen polynom anfügen
 	for i, val := range p {
@@ -41,27 +43,13 @@ func (p Polynom) Add(q Polynom) Polynom {
 		result[i] += val
 	}
 
-	// entfernt die 0 werde aus dem polynom. edge case wenn
-	finalResult := removeZeroValues(result)
-
-	// Sicherstellen, dass mindestens ein Element im finalResult bleibt
-	if len(finalResult) == 0 {
-		finalResult = append(finalResult, 0)
-	}
-
-	// das neue zusammengezählte polynom zurückgeben
-	return finalResult
-}
-
-// entfert die 0 werte aus dem polynom
-func removeZeroValues(p Polynom) Polynom {
-	var result Polynom
-	for _, val := range p {
-		if val != 0 {
-			result = append(result, val)
+	for i := len(result); i >= 1; i-- {
+		if result[i-1] != 0 {
+			return result[:i]
 		}
 	}
-	return result
+
+	return result[:1]
 }
 
 func (p Polynom) Mul(q Polynom) Polynom {
