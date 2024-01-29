@@ -65,11 +65,11 @@ func removeZeroValues(p Polynom) Polynom {
 }
 
 func (p Polynom) Mul(q Polynom) Polynom {
-	// Calculate the degree of the resulting polynomial
-	deg := p.Grad() + q.Grad()
+	// "Der Grad des resultierenden Polynoms ist die Summe der Grade der Ausgangspolynome – Ende." S. Mühlebach (18. Januar 2024)
+	gradNewPolynom := p.Grad() + q.Grad()
 
 	// Initialize the resulting polynomial with the appropriate degree
-	result := make(Polynom, deg+1)
+	result := make(Polynom, gradNewPolynom+1)
 
 	// Perform polynomial multiplication using nested loops
 	for i := 0; i <= p.Grad(); i++ {
