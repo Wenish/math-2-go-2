@@ -41,7 +41,7 @@ func (p Polynom) Add(q Polynom) Polynom {
 		result[i] += val
 	}
 
-	// Entferne Nullwerte aus dem result
+	// entfernt die 0 werde aus dem polynom. edge case wenn
 	finalResult := removeZeroValues(result)
 
 	// Sicherstellen, dass mindestens ein Element im finalResult bleibt
@@ -53,7 +53,7 @@ func (p Polynom) Add(q Polynom) Polynom {
 	return finalResult
 }
 
-// Funktion zum Entfernen von Nullwerten aus einem Polynom
+// entfert die 0 werte aus dem polynom
 func removeZeroValues(p Polynom) Polynom {
 	var result Polynom
 	for _, val := range p {
@@ -71,9 +71,10 @@ func (p Polynom) Mul(q Polynom) Polynom {
 	// Array erstellen, welches genügen platz hat für das neue Polynom
 	result := NewPolynom(gradNewPolynom)
 
-	// Perform polynomial multiplication using nested loops
 	for i := 0; i <= p.Grad(); i++ {
 		for j := 0; j <= q.Grad(); j++ {
+			// p[i] * q[j] ergeben multipliziert die summe welche bei dem entsprechenden koeffizent index addiert werden muss
+			// i+j ergibt den koeffizent index
 			result[i+j] += p[i] * q[j]
 		}
 	}
