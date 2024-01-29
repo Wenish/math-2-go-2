@@ -29,17 +29,38 @@ func (p Polynom) Eq(q Polynom) bool {
 }
 
 func (p Polynom) Add(q Polynom) Polynom {
-	// Ensure the resulting polynomial has enough space
+	// Array erstellen, welches genügen platz hat für das neue Polynom
 	result := make(Polynom, max(p.Grad(), q.Grad())+1)
 
-	// Perform polynomial addition by adding corresponding coefficients
+	// das basis polynom zum neuen polynom anfügen
 	for i, val := range p {
 		result[i] += val
 	}
+	// das polynom welches addiert werden soll zum neuen polynom anfügen
 	for i, val := range q {
 		result[i] += val
 	}
 
+	// Entferne Nullwerte aus dem result
+	finalResult := removeZeroValues(result)
+
+	// Sicherstellen, dass mindestens ein Element im finalResult bleibt
+	if len(finalResult) == 0 {
+		finalResult = append(finalResult, 0)
+	}
+
+	// das neue zusammengezählte polynom zurückgeben
+	return finalResult
+}
+
+// Funktion zum Entfernen von Nullwerten aus einem Polynom
+func removeZeroValues(p Polynom) Polynom {
+	var result Polynom
+	for _, val := range p {
+		if val != 0 {
+			result = append(result, val)
+		}
+	}
 	return result
 }
 
@@ -61,7 +82,7 @@ func (p Polynom) Mul(q Polynom) Polynom {
 }
 
 func (p Polynom) Eval(x float64) float64 {
-	// Evaluate the polynomial using Horner's method
+	// Mit Horner's Methode das Polynom evaluieren
 	result := 0.0
 	for i := p.Grad(); i >= 0; i-- {
 		result = result*x + p[i]
