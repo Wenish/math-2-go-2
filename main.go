@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	fmt.Println("Hallo")
+	fmt.Println("Hallo to the polynom program")
 
 	var p1a, p1b, p2, p3, p4 polynom.Polynom
 
@@ -37,4 +37,7 @@ func main() {
 	fmt.Printf("p6 : %v, grad: %d\n", p6, p6.Grad())
 
 	fmt.Printf("p4(2.56): %.5f\n", p4.Eval(2.56))
+
+	p7 := polynom.NewPolynomByValues(+2, -6, +2, -1)
+	fmt.Printf("p7(2): %.5f\n", p7.Eval(1))
 }
