@@ -67,7 +67,13 @@ func (p Polynom) Mul(q Polynom) Polynom {
 		}
 	}
 
-	return result
+	for i := len(result); i >= 1; i-- {
+		if result[i-1] != 0 {
+			return result[:i]
+		}
+	}
+
+	return result[:1]
 }
 
 func (p Polynom) Eval(x float64) float64 {

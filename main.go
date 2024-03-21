@@ -40,4 +40,10 @@ func main() {
 
 	p7 := polynom.NewPolynomByValues(+2, -6, +2, -1)
 	fmt.Printf("p7(2): %.5f\n", p7.Eval(1))
+
+	p8 := polynom.NewPolynom(6)
+	p9 := polynom.NewPolynomByValues(43, 3, 6)
+	p10 := p8.Mul(p9)
+
+	fmt.Printf("10 : %v, grad: %d\n", p10, p10.Grad())
 }
