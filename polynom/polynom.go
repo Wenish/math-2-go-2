@@ -78,10 +78,10 @@ func (p Polynom) Mul(q Polynom) Polynom {
 
 func (p Polynom) Eval(x float64) float64 {
 	// Mit Horner's Methode das Polynom evaluieren
-	sum := p[0]
-	for i := 1; i < len(p); i++ {
-		sum = sum*x + p[i]
+	result := 0.0
+	for i := p.Grad(); i >= 0; i-- {
+		result = result*x + p[i]
 	}
 
-	return sum
+	return result
 }
